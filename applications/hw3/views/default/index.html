@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+    var my_url = "{{=URL('api', 'my_method')}}";
+    //var add_track_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
+</script>
+{{end}}
+
+<div class="main_content">
+    {{if auth.user is not None:}}
+        <a href="{{=URL('default')}}" class="btn rounded"><i class="fa fa-plus"></i> Add Track</a>
+    {{pass}}
+
+    <div id="vue-div" class="display:none">
+        <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+    </div>
+
+</div>
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
