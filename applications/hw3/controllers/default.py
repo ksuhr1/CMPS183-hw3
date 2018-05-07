@@ -20,6 +20,7 @@ def index():
     response.flash = T("Hello World")
     return dict(message=T('Welcome to web2py!'))
 
+
 def add():
     """This is a temporary function to allow users to easily add tracks, mainly for testing."""
     form = SQLFORM(db.checklist)

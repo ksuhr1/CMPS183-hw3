@@ -3,6 +3,8 @@
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
+    var memos_url = "{{=URL('api', 'get_memos')}}";
+     var add_memo_url = "{{=URL('api', 'add_track', user_signature=True)}}";
     var my_url = "{{=URL('api', 'my_method')}}";
     //var add_track_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
 </script>
@@ -15,6 +17,31 @@
 
     <div id="vue-div" class="display:none">
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+        <div class="result_table">
+          <table class="track_table">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Text</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="memo in memos">
+              <td></td>
+              <td>${memo.title}</td>
+              <td>${memo.text}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div v-if="has_more" class="show_more">
+            <button class="btn btn-default rounded" v-on:click="get_more()">
+              <i class="fa fa-ellipsis-h"></i>
+              Load more
+            </button>
+          </div>
+        </div>
     </div>
 
 </div>
