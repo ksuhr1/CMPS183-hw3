@@ -5,6 +5,8 @@
 <script>
     var memos_url = "{{=URL('api', 'get_memos')}}";
     var add_memo_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
+    var edit_memo_url = "{{=URL('api', 'edit_memo', user_signature=True)}}";
+    var del_memo_url = "{{=URL('api', 'del_memo', user_signature=True)}}";
 </script>
 {{end}}
 
@@ -27,18 +29,34 @@
             <form action="#" v-on:submit.prevent="add_memo" class="form-horizontal" enctype="multipart/form-data" method="post">
                 <div>
                     <textarea class="form-control string" id="no_table_content"
-                              v-model="form_title"
-                              placeholder="Title"
-                              type="text" >
+                          v-model="form_title"
+                          placeholder="Title"
+                          type="text" >
                     </textarea>
                     <span class="help-block"></span>
+                </div>
+                <div>
+                    <textarea class="form-control string" id="no_table_content"
+                          v-model="form_content"
+                          placeholder="Content"
+                          type="text" >
+                    </textarea>
+                    <span class="help-block"></span>
+                </div>
+                <div class="form-group" id="submit_record__row">
+                    <div>
+                        <input class="btn btn-primary" id="add_memo_submit" type="submit" value="Submit" />
+                    </div>
                 </div>
             </form>
         </div>
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
         <div class="result_table">
             <div v-for="memo in memos">
-              <p>Title: ${memo.title}</p>
+                <p>Title: ${memo.title}</p>
+                <p>Content: ${memo.memo_content}</p>
+                <i class="fa fa-pencil" v-on:click="edit_memo(memo.id)"></i>
+                <i class="fa fa-trash-o" v-on:click="delete_memo(memo.id)"></i>
             </div>
             <div v-if="has_more" class="show_more">
             <button class="btn btn-default rounded" v-on:click="get_more()">
