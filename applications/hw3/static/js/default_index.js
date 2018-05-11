@@ -73,6 +73,7 @@ var app = function() {
         // The submit button to add a track has been added.
         $.post(edit_memo_url,
             {
+                title:self.vue.edit_title,
                 memo_content: self.vue.edit_content,
                 id: self.vue.edit_id
             },

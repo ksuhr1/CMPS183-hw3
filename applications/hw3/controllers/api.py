@@ -40,7 +40,7 @@ def add_memo():
 @auth.requires_signature()
 def edit_memo():
     memo = db(db.memo.id == request.vars.id).select().first()
-    memo.update_record(memo_content=request.vars.memo_content)
+    memo.update_record(title=request.vars.memo_content, memo_content=request.vars.memo_content)
 
     print memo
     return dict()

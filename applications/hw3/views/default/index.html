@@ -60,9 +60,18 @@
 
                         <!-- Content that is being edited for a memo -->
                         <div class="form-group" id="no_table_content__row">
+                             <div>
+                                <textarea class="form-control string" id="no_table_content"
+                                          v-model="edit_title = memo.title"
+                                          placeholder="Title"
+                                          type="text" >
+
+                                </textarea>
+                                <span class="help-block"></span>
+                            </div>
                             <div>
                                 <textarea class="form-control string" id="no_table_content"
-                                          v-model="edit_content = memo.content"
+                                          v-model="edit_content = memo.memo_content"
                                           placeholder="Content"
                                           type="text" >
 
@@ -85,7 +94,7 @@
                                 <button v-if="editing" class="btn btn-primary btn-sm memo-edit-button"
                                         v-on:click="edit_memo_submit()"
                                         type="submit">
-                                        memo
+                                        Save
                                 </button>
                             </div>
                         </div>
@@ -97,7 +106,7 @@
                 <!-- if it is your memo show the editing icons -->
 
                             <i class="fa fa-pencil" v-on:click="edit_memo(memo.id)"></i>
-                            <i class="fa fa-trash-o" v-on:click="delete_track(memo.id)"></i>
+                            <i class="fa fa-trash-o" v-on:click="delete_memo(memo.id)"></i>
 
 
             </div>
