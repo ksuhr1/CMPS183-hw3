@@ -49,7 +49,7 @@ var app = function() {
 
     self.add_memo = function () {
         // The submit button to add a memo has been added.
-        $.memo(add_memo_url,
+        $.post(add_memo_url,
             {
                 title: self.vue.form_title,
                 memo_content: self.vue.form_content
@@ -71,7 +71,7 @@ var app = function() {
 
     self.edit_memo_submit = function () {
         // The submit button to add a track has been added.
-        $.memo(edit_memo_url,
+        $.post(edit_memo_url,
             {
                 memo_content: self.vue.edit_content,
                 id: self.vue.edit_id
@@ -96,7 +96,7 @@ var app = function() {
     };
 
     self.delete_memo = function(memo_id) {
-        $.memo(del_memo_url,
+        $.post(del_memo_url,
             {
                 memo_id: memo_id
             },
