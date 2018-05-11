@@ -73,6 +73,7 @@ var app = function() {
         $.post(edit_post_url,
             {
                 post_content: self.vue.edit_content,
+                title: self.vue.edit_title,
                 id: self.vue.edit_id
             },
             function (data) {

@@ -81,6 +81,8 @@ var app = function() {
                 self.vue.editing = !self.vue.editing;
             });
     };
+    
+    
     self.edit_memo = function(memo_id) {
         console.log("yes");
         self.vue.editing = !self.vue.editing;
@@ -121,19 +123,27 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            is_adding_memo: false,
             memos: [],
+            is_adding_memo: false,
             logged_in: false,
+            editing: false,
+            get_more: false,
             has_more: false,
+            form_content: null,
             form_title: null,
-            form_content: null
-
+            edit_content: null,
+            edit_title: null,
+            edit_id: 0,
+            show: true
         },
         methods: {
             get_more: self.get_more,
             add_memo_button: self.add_memo_button,
             add_memo: self.add_memo,
-            delete_memo: self.delete_memo
+            delete_memo: self.delete_memo,
+            edit_memo: self.edit_memo,
+            cancel_edit: self.cancel_edit,
+            edit_memo_submit: self.edit_memo_submit
         }
 
     });

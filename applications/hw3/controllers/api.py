@@ -36,14 +36,14 @@ def add_memo():
     t = db.memo(t_id)
     return response.json(dict(memo=t))
 
+
 @auth.requires_signature()
 def edit_memo():
     memo = db(db.memo.id == request.vars.id).select().first()
-    memo.update_record(title=request.vars.title, post_content=request.vars.memo_content)
+    memo.update_record(memo_content=request.vars.memo_content)
 
     print memo
     return dict()
-
 
 
 @auth.requires_signature()
