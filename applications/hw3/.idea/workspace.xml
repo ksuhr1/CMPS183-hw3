@@ -23,8 +23,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/default/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="60" column="26" lean-forward="true" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+            <state relative-caret-position="377">
+              <caret line="96" column="58" lean-forward="true" selection-start-line="96" selection-start-column="58" selection-end-line="96" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -103,10 +103,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="462" />
+    <option name="x" value="293" />
     <option name="y" value="-1177" />
-    <option name="width" value="1110" />
-    <option name="height" value="802" />
+    <option name="width" value="1279" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -224,7 +224,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="462" y="-1177" width="1110" height="802" extended-state="0" />
+    <frame x="293" y="-1177" width="1279" height="1028" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -232,9 +232,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49710146" weight="0.3296875" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="7" sideWeight="0.4985507" visible="true" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="7" sideWeight="0.4985507" visible="true" weight="0.24919441" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.110486895" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09539208" />
       <window_info anchor="right" id="R Packages" order="3" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="R Graphics" order="3" />
@@ -633,8 +633,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/default/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="60" column="26" lean-forward="true" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+        <state relative-caret-position="377">
+          <caret line="96" column="58" lean-forward="true" selection-start-line="96" selection-start-column="58" selection-end-line="96" selection-end-column="58" />
         </state>
       </provider>
     </entry>
