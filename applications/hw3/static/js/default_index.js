@@ -79,20 +79,21 @@ var app = function() {
             },
             function (data) {
                 $.web2py.enableElement($("#edit_memo_submit"));
-                self.vue.editing = !self.vue.editing;
+                self.vue.is_being_edited = !self.vue.is_being_edited;
             });
     };
     
     
     self.edit_memo = function(memo_id) {
         console.log("yes");
-        self.vue.editing = !self.vue.editing;
+        self.vue.is_being_edited = !self.vue.is_being_edited;
         self.vue.edit_id = memo_id;
     };
 
     self.cancel_edit = function () {
-        self.vue.editing = !self.vue.editing;
+        self.vue.is_being_edited = !self.vue.is_being_edited;
         self.vue.edit_id = 0;
+        console.log(self.vue.form_title);
 
     };
 
@@ -127,7 +128,7 @@ var app = function() {
             memos: [],
             is_adding_memo: false,
             logged_in: false,
-            editing: false,
+            is_being_edited: false,
             get_more: false,
             has_more: false,
             form_content: null,
