@@ -4,38 +4,43 @@
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
     var memos_url = "{{=URL('api', 'get_memos')}}";
-     var add_memo_url = "{{=URL('api', 'add_track', user_signature=True)}}";
-    var my_url = "{{=URL('api', 'my_method')}}";
-    //var add_track_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
+    var add_memo_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
 </script>
 {{end}}
 
 <div class="main_content">
-    {{if auth.user is not None:}}
-        <a href="{{=URL('default')}}" class="btn rounded"><i class="fa fa-plus"></i> Add Track</a>
-    {{pass}}
-
     <div id="vue-div" class="display:none">
+        <div class="button_bar">
+            <button v-if="!is_adding_memo" class="btn"
+                    v-on:click="add_memo_button()"
+                    :disabled="!logged_in"
+                    v-bind:class="{'disabled': !logged_in}">
+                <i class="fa fa-plus"></i> Add memo
+            </button>
+            <button v-if="is_adding_memo" class="btn "
+                    v-on:click="add_memo_button()">
+                <i class="fa fa-times"></i> Cancel
+            </button>
+        </div>
+
+        <div v-if="is_adding_memo" id="add_memo_div">
+            <form action="#" v-on:submit.prevent="add_memo" class="form-horizontal" enctype="multipart/form-data" method="post">
+                <div>
+                    <textarea class="form-control string" id="no_table_content"
+                              v-model="form_title"
+                              placeholder="Title"
+                              type="text" >
+                    </textarea>
+                    <span class="help-block"></span>
+                </div>
+            </form>
+        </div>
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
         <div class="result_table">
-          <table class="track_table">
-            <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Text</th>
-              <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="memo in memos">
-              <td></td>
-              <td>${memo.title}</td>
-              <td>${memo.text}</td>
-            </tr>
-            </tbody>
-          </table>
-          <div v-if="has_more" class="show_more">
+            <div v-for="memo in memos">
+              <p>Title: ${memo.title}</p>
+            </div>
+            <div v-if="has_more" class="show_more">
             <button class="btn btn-default rounded" v-on:click="get_more()">
               <i class="fa fa-ellipsis-h"></i>
               Load more
