@@ -11,6 +11,7 @@ def get_memos():
         if i < end_idx - start_idx:
             t = dict(
                 id=r.id,
+                user_email=r.user_email,
                 title=r.title,
                 memo_content=r.memo_content
             )
@@ -29,6 +30,7 @@ def get_memos():
 def add_memo():
 
     t_id = db.memo.insert(
+        user_email=request.vars.user_email,
         title=request.vars.title,
         memo_content=request.vars.memo_content
     )
@@ -50,3 +52,5 @@ def edit_memo():
 def del_memo():
     db(db.memo.id == request.vars.memo_id).delete()
     return "ok"
+
+
