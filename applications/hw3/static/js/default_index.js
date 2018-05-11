@@ -22,8 +22,10 @@ var app = function() {
             end_idx: end_idx
         };
         //replace this
-        return memos_url+"?"+$.param(pp);
+        return memos_url + "?" + $.param(pp);
     }
+
+
     self.get_memos = function() {
         $.getJSON(get_memos_url(0,10), function(data){
             self.vue.memos = data.memos;
@@ -42,21 +44,50 @@ var app = function() {
         });
     };
 
+    self.add_memo_button = function () {
+        // The button to add a track has been pressed.
+        self.vue.is_adding_memo = !self.vue.is_adding_memo;
+    };
+
+     self.add_memo = function () {
+        // The submit button to add a track has been added.
+        $.post(add_memo_url,
+            {
+                title: self.vue.form_title,
+                content: self.vue.form_content,
+            },
+            function (data) {
+                $.web2py.enableElement($("#add_memo_submit"));
+                self.vue.tracks.unshift(data.memo);
+                self.vue.is_adding_memo = !self.vue.is_adding_memo;
+                self.vue.form_content="";
+              //  enumerate(self.vue.memos);
+            });
+    };
+
+
     // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            memos:[],
-            logged_in:  false,
-            has_more: false
+            is_adding_memo: false,
+            memos: [],
+            logged_in: false,
+            has_more: false,
+            form_title: null,
+            form_content: null,
+
         },
         methods: {
-            get_more:self.get_more
+            get_more:self.get_more,
+            add_memo_button: self.add_memo_button,
+            add_memo: self.add_memo
         }
 
     });
+
     self.get_memos();
     $("#vue-div").show();
 

@@ -4,37 +4,63 @@
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
     var memos_url = "{{=URL('api', 'get_memos')}}";
-     var add_memo_url = "{{=URL('api', 'add_track', user_signature=True)}}";
-    var my_url = "{{=URL('api', 'my_method')}}";
-    //var add_track_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
+    var add_memo_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
 </script>
 {{end}}
 
 <div class="main_content">
-    {{if auth.user is not None:}}
-        <a href="{{=URL('default')}}" class="btn rounded"><i class="fa fa-plus"></i> Add Track</a>
-    {{pass}}
 
     <div id="vue-div" class="display:none">
+        <div class="button_bar">
+            <button v-if="!is_adding_memo" class="btn"
+                    v-on:click="add_memo_button()"
+                    :disable="!logged_in"
+                    v-bind:class="{'disabled': !logged_in}">
+                <i class="fa fa-plus"></i> Add memo
+            </button>
+
+            <button v-if="is_adding_memo" class="btn"
+                    v-on:click="add_memo()">
+                <i class="fa fa-plus"></i> Add
+            </button>
+
+            <button v-if="is_adding_memo" class="btn"
+                    v-on:click=":add_memo_button()">
+                <i class="fa fa-times"></i> Cancel
+            </button>
+        </div>
+
+        <!--- Form to add memos --->
+         <div v-if="is_adding_memo" id="add_memo_div">
+              <form action="#" v-on:submit.prevent class="form-horizontal" enctype="multipart/form-data" method="post">
+
+                <div class="form-group" id="no_table_album__row">
+                  <div>
+                    <input class="form-control string" id="no_title" name="title" type="text" v-model="form_title" placeholder="Title"/>
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+
+                <div class="form-group" id="no_table_track__row">
+                  <div><input class="form-control string" id="no_content" name="content" type="text" v-model="form_content" placeholder="Content"/>
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+
+                <div class="form-group" id="submit_record__row">
+                  <div>
+                    <input class="btn btn-primary" id="add_memo_submit" type="submit" value="Submit" />
+                  </div>
+                </div>
+
+              </form>
+        </div>
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
         <div class="result_table">
-          <table class="track_table">
-            <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Text</th>
-              <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="memo in memos">
-              <td></td>
-              <td>${memo.title}</td>
-              <td>${memo.text}</td>
-            </tr>
-            </tbody>
-          </table>
+            <div v-for="memo in memos">
+              <p> Title ${memo.title}</p>
+              <p> Content ${memo.content}</p>
+            </div>
           <div v-if="has_more" class="show_more">
             <button class="btn btn-default rounded" v-on:click="get_more()">
               <i class="fa fa-ellipsis-h"></i>
@@ -42,6 +68,7 @@
             </button>
           </div>
         </div>
+
     </div>
 
 </div>

@@ -23,7 +23,7 @@ def index():
 
 def add():
     """This is a temporary function to allow users to easily add tracks, mainly for testing."""
-    form = SQLFORM(db.checklist)
+    form = SQLFORM(db.memo)
     if form.process().accepted:
         redirect(URL('default', 'index'))
     return dict(form=form)

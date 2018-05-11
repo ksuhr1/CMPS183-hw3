@@ -10,18 +10,39 @@ def get_memos():
     # generate a lot of data
 
     memos = []
+    has_more = False
+    rows = db().select(db.memo.ALL, limitby=(start_idx, end_idx+1))
 
-    for i in range(start_idx, end_idx):
-        t = dict(
-            title=random.choice(['Hi', 'WAS SUP', 'WHAT IS HAPPENING']),
-            text=random.choice(['this sucks', 'wow', 'wish i was home']),
-        )
-        memos.append(t)
-    has_more = True
-    logged_in = False
+    for i, r in enumerate(rows):
+        if i < end_idx - start_idx:
+            t = dict(
+                id=r.id,
+                title=r.title,
+                content=r.memo_content,
+            )
+            memos.append(t)
+        else:
+            has_more = True
+    logged_in = auth.user is not None
     return response.json(dict(
         memos=memos,
         logged_in=logged_in,
         has_more=has_more,
     ))
+
+
+@auth.requires_signature()
+def add_memo():
+    t_id = db.memo.insert(
+        title=request.vars.title,
+        memo_content=request.vars.content
+    )
+    t = db.memo(t_id)
+    return response.json(dict(memo=t))
+
+
+@auth.requires_signature()
+def del_memo():
+    db(db.memo.id == request.vars.memo_id).delete()
+    return"ok"
 
