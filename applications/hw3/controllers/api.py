@@ -57,17 +57,15 @@ def del_memo():
 
 @auth.requires_signature()
 def tog_memo():
-    memo = db(db.memo.id == request.vars.id).select().first()
-    status=request.vars.is_public
-
-
-
-    # memo_id = request.vars.memo_id
-    # t = db(db.memo.id == memo_id).select().first()
-    # t.update_record(is_public=True)
-    # # row = db(db.memo.id == request.vars.memo_id).select().first()
-    # print t
-    # return t
+    q = db.memo.id == request.vars.memo_id
+    row = db(q).select().first()
+    if row.is_public is True:
+        row.is_public = False
+        row.update_record()
+    else:
+        row.is_public = True
+        row.update_record()
+    return response.json(dict())
 
 
 
