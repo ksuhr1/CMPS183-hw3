@@ -7,6 +7,7 @@
     var add_memo_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
     var edit_memo_url = "{{=URL('api', 'edit_memo', user_signature=True)}}";
     var del_memo_url = "{{=URL('api', 'del_memo', user_signature=True)}}";
+    var toggle_memo_url = "{{=URL('api', 'tog_memo', user_signature=True)}}";
 </script>
 {{end}}
 
@@ -61,12 +62,21 @@
                                 <p>Content: ${memo.memo_content}</p>
                           </div>
                       </div>
+
+                     <!-- Button functions-->
                      {{if auth.user:}}
                         <div v-if="memo.user_email == '{{=auth.user.email}}'">
                              <i class="fa fa-edit fa-lg" v-on:click="edit_memo(memo.id)"></i>
                              <i class="fa fa-trash fa-lg" v-on:click="delete_memo(memo.id)"></i>
-                             <i class="fa fa-user fa-lg"></i>
+                             <i v-if="!memo.is_public"
+                                class="fa fa-user fa-lg" v-on:click="toggle_memo(memo.id)"></i>
+                             <i v-if="memo.is_public"
+                                class="fa fa-users fa-lg" v-on:click="toggle_memo(memo.id)"></i>
                         </div>
+                     {{else:}}
+                            <i class="fa fa-edit fa-lg"></i>
+                             <i class="fa fa-trash fa-lg"></i>
+                             <i class="fa fa-user fa-lg"></i>
                     {{pass}}
                      <!--Text area for for editing the text memo -->
                     <div v-if="is_being_edited && edit_id==memo.id">

@@ -47,6 +47,7 @@ var app = function() {
             self.vue.is_adding_memo = !self.vue.is_adding_memo;
     };
 
+
     self.add_memo = function () {
         // The submit button to add a memo has been added.
         $.post(add_memo_url,
@@ -58,6 +59,7 @@ var app = function() {
                 $.web2py.enableElement($("#add_memo_submit"));
                 self.vue.memos.unshift(data.memo);
                 console.log(self.vue.memos.length);
+                enumerate(self.vue.memos);
 
                 //if memos have length greater than 10, has_more is true
                 if(self.vue.memos.length > 10 ){
@@ -68,6 +70,26 @@ var app = function() {
                 self.vue.form_content="";
             });
     };
+
+    self.toggle_memo = function(memo_id) {
+        var memo = self.vue.memos[memo_id];
+        console.log("Variable memo " + memo)
+        // memo.is_public = !memo.is_public;
+        //   $.post(toggle_memo_url,
+        //   {
+        //     memo_id: memo.id
+        //   },
+        //   function () {
+        //     var idx = null;
+        //     for (var i = 0; i < self.vue.memos.length; i++) {
+        //       if (self.vue.memos[i].id === memo_id) {
+        //         idx = i + 1;
+        //         break;
+        //       }
+        //     }
+        //   })
+    };
+
 
     self.edit_memo_submit = function () {
         // The submit button to add a track has been added.
@@ -135,8 +157,9 @@ var app = function() {
             form_title: null,
             edit_content: null,
             edit_title: null,
-            edit_id: 0,
-            show: true
+            is_public: false,
+            mem_idx:0,
+            edit_id: 0
         },
         methods: {
             get_more: self.get_more,
@@ -145,6 +168,7 @@ var app = function() {
             delete_memo: self.delete_memo,
             edit_memo: self.edit_memo,
             cancel_edit: self.cancel_edit,
+            toggle_memo: self.toggle_memo,
             edit_memo_submit: self.edit_memo_submit
         }
 

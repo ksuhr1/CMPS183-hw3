@@ -11,6 +11,7 @@ def get_memos():
         if i < end_idx - start_idx:
             t = dict(
                 id=r.id,
+                is_public=r.is_public,
                 user_email=r.user_email,
                 title=r.title,
                 memo_content=r.memo_content
@@ -52,5 +53,16 @@ def edit_memo():
 def del_memo():
     db(db.memo.id == request.vars.memo_id).delete()
     return "ok"
+
+
+@auth.requires_signature()
+def tog_memo():
+    memo_id = request.vars.memo_id
+    t = db(db.memo.id == memo_id).select().first()
+    # row = db(db.memo.id == request.vars.memo_id).select().first()
+    print t
+    return t
+
+
 
 
