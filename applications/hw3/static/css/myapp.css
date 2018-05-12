@@ -2,3 +2,15 @@
 .colorful {
   color: #bb8833;
 }
+
+.grayed-out{
+  color: #6666668c;
+}
+
+button:disabled {
+  background-color: lightgray;
+}
+
+button:disabled:hover {
+  box-shadow: none;
+}

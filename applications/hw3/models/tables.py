@@ -24,12 +24,7 @@ db.define_table('memo',
                 )
 
 
-db.memo.user_email.writable = False
-db.memo.user_email.readable = False
-db.memo.is_public.writable = False
-db.memo.is_public.readable = False
-db.memo.updated_on.writable = db.memo.updated_on.readable = False
-db.memo.id.writable = db.memo.id.readable = False
+
 # after defining tables, uncomment below to enable auditing
 #auth.enable_record_versioning(db)
 

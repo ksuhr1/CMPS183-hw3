@@ -146,6 +146,7 @@ var app = function() {
             form_title: null,
             edit_content: null,
             edit_title: null,
+            show: true,
             is_public: false,
             edit_id: 0
         },
