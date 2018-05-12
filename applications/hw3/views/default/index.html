@@ -5,17 +5,13 @@
 <script>
     var memos_url = "{{=URL('api', 'get_memos')}}";
     var add_memo_url = "{{=URL('api', 'add_memo', user_signature=True)}}";
-<<<<<<< HEAD
-=======
     var edit_memo_url = "{{=URL('api', 'edit_memo', user_signature=True)}}";
     var del_memo_url = "{{=URL('api', 'del_memo', user_signature=True)}}";
     var toggle_memo_url = "{{=URL('api', 'tog_memo', user_signature=True)}}";
->>>>>>> phase3
 </script>
 {{end}}
 
 <div class="main_content">
-<<<<<<< HEAD
 
     <div id="vue-div" class="display:none">
         <div class="button_bar">
@@ -33,8 +29,8 @@
 
             <button v-if="is_adding_memo" class="btn"
                     v-on:click=":add_memo_button()">
-=======
-    <div id="vue-div" class="display:none">
+            </button>
+    <div class id="vue-div" class="display:none">
 
         <div class="button_bar">
             <button v-if="!is_adding_memo" class="btn"
@@ -45,12 +41,12 @@
             </button>
             <button v-if="is_adding_memo" class="btn "
                     v-on:click="add_memo_button()">
->>>>>>> phase3
+
                 <i class="fa fa-times"></i> Cancel
             </button>
         </div>
 
-<<<<<<< HEAD
+
         <!--- Form to add memos --->
          <div v-if="is_adding_memo" id="add_memo_div">
               <form action="#" v-on:submit.prevent class="form-horizontal" enctype="multipart/form-data" method="post">
@@ -88,7 +84,7 @@
               Load more
             </button>
           </div>
-=======
+
         <div v-if="is_adding_memo" id="add_memo_div">
             <form action="#" v-on:submit.prevent="add_memo" class="form-horizontal" enctype="multipart/form-data" method="memo">
                 <div>
@@ -156,7 +152,7 @@
                                             type="button">
                                             Cancel
                                     </button>
-                s               </div>
+                               </div>
                                 <div class="col-md-6">
                                     <button v-if="is_being_edited" class="btn btn-primary btn-sm memo-edit-button"
                                             v-on:click="edit_memo_submit()"
@@ -203,10 +199,11 @@
                 </button>
             </div>
 
->>>>>>> phase3
+
         </div>
 
     </div>
 
 </div>
+
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>

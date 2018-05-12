@@ -8865,3 +8865,19 @@
 127.0.0.1, 2018-05-12 02:01:00, GET, /hw3/api/get_memos, HTTP/1.1, 200, 0.053115
 127.0.0.1, 2018-05-12 02:01:01, GET, /favicon.ico, HTTP/1.1, 400, 0.000479
 >>>>>>> phase3
+127.0.0.1, 2018-05-12 02:10:39, GET, /hw3/default/index, HTTP/1.1, 200, 0.079200
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/css/custom.css, HTTP/1.1, 200, 0.001294
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/css/web2py.css, HTTP/1.1, 200, 0.003217
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/font-awesome-4.6.3/css/font-awesome.min.css, HTTP/1.1, 200, 0.002487
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/css/calendar.css, HTTP/1.1, 200, 0.006131
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/js/jquery.js, HTTP/1.1, 200, 0.002222
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/js/calendar.js, HTTP/1.1, 200, 0.000890
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/js/vue.js, HTTP/1.1, 200, 0.000850
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/js/default_index.js, HTTP/1.1, 200, 0.003513
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/js/marked.min.js, HTTP/1.1, 200, 0.002879
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/js/vue.min.js, HTTP/1.1, 200, 0.000729
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/css/stupid.css, HTTP/1.1, 200, 0.022188
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/css/myapp.css, HTTP/1.1, 200, 0.027038
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/js/web2py.js, HTTP/1.1, 200, 0.074478
+127.0.0.1, 2018-05-12 02:10:40, GET, /hw3/static/font-awesome-4.6.3/fonts/fontawesome-webfont.woff2, HTTP/1.1, 200, 0.000542
+127.0.0.1, 2018-05-12 02:10:41, GET, /favicon.ico, HTTP/1.1, 400, 0.000528
