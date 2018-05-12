@@ -64,20 +64,14 @@
                       </div>
 
                      <!-- Button functions-->
-                     {{if auth.user:}}
-                        <div v-if="memo.user_email == '{{=auth.user.email}}'">
+
                              <i class="fa fa-edit fa-lg" v-on:click="edit_memo(memo.id)"></i>
-                             <i class="fa fa-trash fa-lg" v-on:click="delete_memo(memo.id)"></i>
+                             <i class="fa fa-trash fa-lg" v-on:click="delete_memo(memo._idx)"></i>
                              <i v-if="!memo.is_public"
-                                class="fa fa-user fa-lg" v-on:click="toggle_memo(memo.id)"></i>
+                                class="fa fa-user fa-lg" v-on:click="toggle_memo(memo._idx)"></i>
                              <i v-if="memo.is_public"
-                                class="fa fa-users fa-lg" v-on:click="toggle_memo(memo.id)"></i>
-                        </div>
-                     {{else:}}
-                            <i class="fa fa-edit fa-lg"></i>
-                             <i class="fa fa-trash fa-lg"></i>
-                             <i class="fa fa-user fa-lg"></i>
-                    {{pass}}
+                                class="fa fa-users fa-lg" v-on:click="toggle_memo(memo._idx)"></i>
+
                      <!--Text area for for editing the text memo -->
                     <div v-if="is_being_edited && edit_id==memo.id">
                         <div class="editable memo-text">

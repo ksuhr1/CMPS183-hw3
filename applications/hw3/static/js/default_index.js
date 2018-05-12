@@ -71,23 +71,24 @@ var app = function() {
             });
     };
 
-    self.toggle_memo = function(memo_id) {
-        var memo = self.vue.memos[memo_id];
-        console.log("Variable memo " + memo)
-        // memo.is_public = !memo.is_public;
-        //   $.post(toggle_memo_url,
-        //   {
-        //     memo_id: memo.id
-        //   },
-        //   function () {
-        //     var idx = null;
-        //     for (var i = 0; i < self.vue.memos.length; i++) {
-        //       if (self.vue.memos[i].id === memo_id) {
-        //         idx = i + 1;
-        //         break;
-        //       }
-        //     }
-        //   })
+    self.toggle_memo = function(memo_idx) {
+          var memo = self.vue.memos[memo_idx];
+          memo.is_public = !memo.is_public;
+          $.post(toggle_memo_url,
+          {
+            memo_id: memo.id
+          },
+          function () {
+            var idx = null;
+            for (var i = 0; i < self.vue.memos.length; i++) {
+              if (self.vue.memos[i].id === memo_idx) {
+                idx = i + 1;
+                break;
+              }
+            }
+          })
+        console.log(memo)
+
     };
 
 
@@ -107,7 +108,7 @@ var app = function() {
     
     
     self.edit_memo = function(memo_id) {
-        console.log("yes");
+        console.log("Editing mode");
         self.vue.is_being_edited = !self.vue.is_being_edited;
         self.vue.edit_id = memo_id;
     };
@@ -119,24 +120,12 @@ var app = function() {
 
     };
 
-    self.delete_memo = function(memo_id) {
+    self.delete_memo = function(memo_idx) {
         $.post(del_memo_url,
-            {
-                memo_id: memo_id
-            },
-            function () {
-                var idx = null;
-                for (var i = 0; i < self.vue.memos.length; i++) {
-                    if (self.vue.memos[i].id === memo_id) {
-                        // If I set this to i, it won't work, as the if below will
-                        // return false for items in first position.
-                        idx = i + 1;
-                        break;
-                    }
-                }
-                if (idx) {
-                    self.vue.memos.splice(idx - 1, 1);
-                }
+            {memo_id: self.vue.memos[memo_idx].id },
+            function(){
+                self.vue.memos.splice(memo_idx,1);
+                enumerate(self.vue.memos);
             }
         )
     };
@@ -158,7 +147,6 @@ var app = function() {
             edit_content: null,
             edit_title: null,
             is_public: false,
-            mem_idx:0,
             edit_id: 0
         },
         methods: {
