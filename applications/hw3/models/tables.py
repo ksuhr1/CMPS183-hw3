@@ -19,12 +19,11 @@ db.define_table('memo',
                 Field('user_email', default=get_user_email()),
                 Field('title'),
                 Field('memo_content', 'text'),
-                Field('updated_on', 'datetime', update=datetime.datetime.utcnow()),
                 Field('is_public', 'boolean', default=False)
                 )
 
 
-
+db.memo.user_email.readable = db.memo.user_email.writable = False
 # after defining tables, uncomment below to enable auditing
 #auth.enable_record_versioning(db)
 

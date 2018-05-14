@@ -54,16 +54,26 @@
         </div>
 
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+       {{if auth.user is not None:}}
         <div class="result_table">
             <div v-for="memo in memos">
                  <div class="memo memo-content">
+                     <div v-if="memo.user_email != '{{=auth.user.email}}'">
                      <!--Text area for memo & checks if it is being edited -->
                       <div v-if="!is_being_edited || (is_being_edited && edit_id != memo.id)">
+
                           <div class="memo-text">
                                 <p>Title: ${memo.title}</p>
                                 <p>Content: ${memo.memo_content}</p>
                           </div>
                       </div>
+
+                     <i class="fa fa-edit fa-lg" v-on:click="edit_memo(memo.id)"></i>
+                     <i class="fa fa-trash fa-lg" v-on:click="delete_memo(memo._idx)"></i>
+                     <i v-if="!memo.is_public"
+                        class="fa fa-user fa-lg" v-on:click="toggle_memo(memo._idx)"></i>
+                     <i v-if="memo.is_public"
+                        class="fa fa-users fa-lg" v-on:click="toggle_memo(memo._idx)"></i>
 
                      <!--Text area for for editing the text memo -->
                     <div v-if="is_being_edited && edit_id==memo.id">
@@ -94,7 +104,7 @@
                                             type="button">
                                             Cancel
                                     </button>
-                s               </div>
+                               </div>
                                 <div class="col-md-6">
                                     <button v-if="is_being_edited" class="btn btn-primary btn-sm memo-edit-button"
                                             v-on:click="edit_memo_submit()"
@@ -103,28 +113,18 @@
                                     </button>
                                 </div>
                             </div>
-
+                        </div>
                     </div>
+
+
                      <!-- Button functions-->
-                        <div v-if="memo.user_email == '{{=auth.user.email}}' ">
 
-                             <i class="fa fa-edit fa-lg" v-on:click="edit_memo(memo.id)"></i>
-                             <i class="fa fa-trash fa-lg" v-on:click="delete_memo(memo._idx)"></i>
-                             <i v-if="!memo.is_public"
-                                class="fa fa-user fa-lg" v-on:click="toggle_memo(memo._idx)"></i>
-                             <i v-if="memo.is_public"
-                                class="fa fa-users fa-lg" v-on:click="toggle_memo(memo._idx)"></i>
-                        </div>
 
-                     <div v-if="memo.user_email != '{{=auth.user.email}})' ">
-                            <i class="fa fa-edit fa-lg disabled" ></i>
-                             <i class="fa fa-trash fa-lg disabled"></i>
-                             <i v-if="!memo.is_public"
-                                class="fa fa-user fa-lg disabled"></i>
-                             <i v-if="memo.is_public"
-                                class="fa fa-users fa-lg disabled"></i>
-                        </div>
-                    {{pass}}
+
+
+
+
+
 
 
                 <!-- if it is your memo show the editing icons -->
@@ -142,6 +142,31 @@
             </div>
 
         </div>
+
+        <!--- Public memos on main screen-->
+        {{else:}}
+        <div v-for="memo in memos">
+            <div v-if="memo.is_public">
+                 <div class="memo memo-content">
+                     <!--Text area for memo & checks if it is being edited -->
+                          <div class="memo-text">
+                              <div v-if="memo.is_public">
+                                <p>Title: ${memo.title}</p>
+                                <p>Content: ${memo.memo_content}</p>
+                              </div>
+                          </div>
+                     <i class="fa fa-edit fa-lg grayed-out"></i>
+                     <i class="fa fa-trash fa-lg grayed-out"></i>
+                     <i v-if="memo.is_public"
+                        class="fa fa-users fa-lg grayed-out"></i>
+
+                 </div>
+            </div>
+        </div>
+
+
+        {{pass}}
+
     </div>
 
 </div>

@@ -11,10 +11,11 @@ def get_memos():
         if i < end_idx - start_idx:
             t = dict(
                 id=r.id,
-                is_public=r.is_public,
                 user_email=r.user_email,
                 title=r.title,
-                memo_content=r.memo_content
+                memo_content=r.memo_content,
+                is_public=r.is_public
+
             )
             memos.append(t)
         else:
@@ -26,18 +27,45 @@ def get_memos():
         has_more=has_more,
     ))
 
+def get_user_name_from_email(email):
+    """Returns a string corresponding to the user first and last names,
+    given the user email."""
+    u = db(db.auth_user.email == email).select().first()
+    if u is None:
+        return 'None'
+    else:
+        return ' '.join([u.first_name, u.last_name])
+
 
 @auth.requires_signature()
 def add_memo():
+    """Here you get a new memo and add it.  Return what you want."""
+    # Implement me!
+    user_email = auth.user.email or None
+    p_id = db.memo.insert(title=request.vars.title, memo_content=request.vars.memo_content)
+    p = db.memo(p_id)
+    name = get_user_name_from_email(p.user_email)
+    memo = dict(
+        id=p.id,
+        title=p.title,
+        user_email=p.user_email,
+        content=p.memo_content,
+        first_name=name[0],
+        last_name=name[1]
 
-    t_id = db.memo.insert(
-        user_email=request.vars.user_email,
-        title=request.vars.title,
-        memo_content=request.vars.memo_content
     )
-
-    t = db.memo(t_id)
-    return response.json(dict(memo=t))
+    print p
+    return response.json(dict(memo=memo))
+    # user_email = auth.user.email or None
+    # t_id = db.memo.insert(
+    #     id=request.vars.id,
+    #     user_email=request.vars.user_email,
+    #     title=request.vars.title,
+    #     memo_content=request.vars.memo_content
+    # )
+    # 
+    # t = db.memo(t_id)
+    # return response.json(dict(memo=t))
 
 
 @auth.requires_signature()
